@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "weekStart": "2026-11-01",
+  "weekEnd": "2026-11-07",
+  "goals": [
+    "Keep morning prayer realistic",
+    "Complete the study blocks selected for this example week",
+    "Protect sleep and review actual spending"
+  ],
+  "dailyTasks": [
+    {
+      "id": "example-study",
+      "date": "2026-11-02",
+      "title": "NREMT airway remediation",
+      "category": "Education",
+      "priority": 1,
+      "scheduledTime": "09:30",
+      "plannedMinutes": 45,
+      "notes": "Use fresh missed-question data; this is a plan, not a completed session."
+    },
+    {
+      "id": "example-workout",
+      "date": "2026-11-04",
+      "title": "Full Body A",
+      "category": "Fitness",
+      "priority": 2,
+      "scheduledTime": "16:00",
+      "plannedMinutes": 40,
+      "travelMinutes": 20
+    }
+  ],
+  "recurringRoutines": [
+    {
+      "id": "morning-prayer",
+      "title": "Prayer and Scripture after waking",
+      "category": "Faith",
+      "priority": 1,
+      "plannedMinutes": 15,
+      "days": [0, 1, 2, 3, 4, 5, 6],
+      "notes": "Choose your own passage and a realistic duration."
+    }
+  ],
+  "workCommitments": [
+    {
+      "id": "example-work",
+      "date": "2026-11-06",
+      "title": "Warehouse shift \u2014 adjustable target",
+      "category": "Employment",
+      "priority": 1,
+      "scheduledTime": "09:00",
+      "plannedMinutes": 480,
+      "travelMinutes": 45,
+      "fixed": true,
+      "notes": "Illustrative shift only. Replace with your confirmed schedule and breaks."
+    }
+  ],
+  "recoveryRecommendations": [
+    "Choose a sufficient sleep opportunity around confirmed commitments; log actual sleep."
+  ],
+  "notes": "Synthetic schema example only. These commitments do not describe the owner\u2019s schedule, history, or completed activity. Import requires preview and confirmation."
+}

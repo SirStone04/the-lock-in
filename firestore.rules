@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function owner(uid) { return request.auth != null && request.auth.uid == uid; }
+    function validRecord(id) {
+      let r = request.resource.data;
+      return r.keys().hasAll(['id','kind','date','title','data','createdAt','updatedAt','revision'])
+        && r.keys().hasOnly(['id','kind','date','title','data','createdAt','updatedAt','revision'])
+        && r.id == id && r.id is string && r.id.size() <= 200
+        && r.kind in ['mission','daily','sleep','shift','payroll','account','transaction','budget','bill','debt','study','assessment','milestone','application','research','workout','exerciseSet','faith','nutrition','skincare','maintenance','week','xp','rankHistory','achievement','report','settings','routine','inventory']
+        && r.date is string && r.date.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && r.title is string && r.title.size() <= 500 && r.data is map
+        && r.createdAt is string && r.updatedAt is string
+        && r.revision is int && r.revision > 0;
+    }
+    match /users/{uid}/records/{id} {
+      allow read, delete: if owner(uid);
+      allow create: if owner(uid) && validRecord(id) && request.resource.data.revision == 1;
+      allow update: if owner(uid) && validRecord(id)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.kind == resource.data.kind
+        && request.resource.data.revision == resource.data.revision + 1;
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}
